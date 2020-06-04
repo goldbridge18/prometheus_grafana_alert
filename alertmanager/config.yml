@@ -1,0 +1,17 @@
+global:
+    resolve_timeout: 5m
+route:
+    group_by: ['alter_cassandra']
+    receiver: 'webhook'
+
+receivers:
+    - name: 'webhook'
+      webhook_configs:
+      - url: http://localhost:8060/dingtalk/webhook1/send  # replace with your PagerTree webhook url
+
+inhibit_rules:
+  - source_match:
+      severity: 'red'
+    target_match:
+      severity: 'red'
+    equal: ['pager', 'dev', 'instance']
