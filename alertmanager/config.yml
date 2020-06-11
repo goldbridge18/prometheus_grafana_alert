@@ -7,7 +7,7 @@ route:
 receivers:
     - name: 'webhook'
       webhook_configs:
-      - url: http://localhost:8060/dingtalk/webhook1/send  # replace with your PagerTree webhook url
+      - url: http://localhost:8060/dingtalk/webhook_legacy/send  # replace with your PagerTree webhook url
 
 inhibit_rules:
   - source_match:

@@ -1,0 +1,14 @@
+targets:
+  webhook1:
+    url: https://oapi.dingtalk.com/robot/send?access_token=db35157388374164e6b483ac9df1c04d0bd9f29ac7bcac70b79b2a5b753ef221
+    secret: SEC33295b1a4e700f8005784d4bfd0083deea979672413cf7a4107bb86c9c7980fa
+  webhook_legacy:
+    url: https://oapi.dingtalk.com/robot/send?access_token=db35157388374164e6b483ac9df1c04d0bd9f29ac7bcac70b79b2a5b753ef221
+    secret: SEC33295b1a4e700f8005784d4bfd0083deea979672413cf7a4107bb86c9c7980fa
+    message:
+      title: '{{ template "legacy.title" . }}'
+      text: '{{ template "legacy.content" . }}'
+  webhook_mention_all:
+    url: https://oapi.dingtalk.com/robot/send?access_token=db35157388374164e6b483ac9df1c04d0bd9f29ac7bcac70b79b2a5b753ef221
+    mention:
+      all: true

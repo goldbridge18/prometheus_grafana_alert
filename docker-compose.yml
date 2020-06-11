@@ -18,6 +18,10 @@ services:
     environment:
       GF_SECURITY_ADMIN_PASSWORD: admin
       GF_SECURITY_ADMIN_USER: admin
+      GF_RENDERING_SERVER_URL: http://10.0.0.64:8081/render
+      GF_RENDERING_CALLBACK_URL: http://10.0.0.64:3000/
+      GF_LOG_FILTERS: rendering:debug
+
     volumes:
       - "grafana:/var/lib/grafana"
       - "./grafana/prometheus-datasource.yaml:/etc/grafana/provisioning/datasources/prometheus-datasource.yaml"
@@ -35,6 +39,23 @@ services:
     command:
       - "--config.file=/etc/alertmanager/config.yml"
       - "--storage.path=/alertmanager"
+  renderer:
+    image: grafana/grafana-image-renderer:latest
+    ports:
+      - 8081:8081
+    environment:
+      ENABLE_METRICS: 'true'
+  webhook:
+    image: timonwong/prometheus-webhook-dingtalk:latest
+    #container_name: prometheus-webhook-alertmanagers
+    hostname: webhook-alertmanagers
+    restart: always
+    volumes:
+      - ./webhook:/etc/prometheus-webhook-dingtalk
+      - ./webhook/config.yml:/etc/prometheus-webhook-dingtalk/config.yml
+      - /etc/localtime:/etc/localtime
+    ports:
+      - "8060:8060"
 
 volumes:
   grafana:
