@@ -9,6 +9,7 @@ services:
       - "./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
       - "./prometheus/tg_cassandra.json:/etc/prometheus/tg_cassandra.json"
       - "./prometheus/tg_node.json:/etc/prometheus/tg_node.json"
+      - "./prometheus/tg_mysql.json:/etc/prometheus/tg_mysql.json"
       - "./prometheus/alert.rules:/etc/prometheus/alert.rules"
       - "/etc/localtime:/etc/localtime:ro"
   grafana:
