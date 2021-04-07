@@ -117,7 +117,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "up{instance=\"$instance\"}",
+          "expr": "sum(up{instance=\"$instance\",job=\"cassandra\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -6242,7 +6242,7 @@
       "30d"
     ]
   },
-  "timezone": "utc",
+  "timezone": "Asia/Shanghai",
   "title": "Cassandra",
   "uid": "000000086",
   "version": 50
