@@ -1,0 +1,20 @@
+groups:
+  - name: pager
+    rules:
+    - alert: InstanceDown
+      expr: up == 0
+      for: 1m
+      labels:
+        severity: red
+      annotations:
+        summary: "Instance {{ $labels.instance }} down"
+        description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes."
+    
+   # - alert: CPU使用率告警
+   #	   expr: 100 - (avg by (instance)(irate(node_cpu_seconds_total{mode="idle"}[1m]) )) * 100 > 100
+   #    for: 1m
+   #    labels:
+   #      severity: red
+   #    annotations:
+   #      description: "服务器: CPU使用超过90%！(当前值: {{ $value }}%)"
+

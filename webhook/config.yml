@@ -1,14 +1,14 @@
 targets:
   webhook1:
-    url: https://oapi.dingtalk.com/robot/send?access_token=db35157388374164e6b483ac9df1c04d0bd9f29ac7bcac70b79b2a5b753ef221
-    secret: SEC33295b1a4e700f8005784d4bfd0083deea979672413cf7a4107bb86c9c7980fa
+    url: https://oapi.dingtalk.com/robot/send?access_token=0e89c96db0cdecca7de49df5c7d6c59f208d32ac7dd3735eda5dd4b85fe0e606 
+    secret: SEC36df2a67e5760f9e8e86af316e6e9ad849c8fa971d37705e7a54b17ffdd2644d
   webhook_legacy:
-    url: https://oapi.dingtalk.com/robot/send?access_token=db35157388374164e6b483ac9df1c04d0bd9f29ac7bcac70b79b2a5b753ef221
-    secret: SEC33295b1a4e700f8005784d4bfd0083deea979672413cf7a4107bb86c9c7980fa
+    url: https://oapi.dingtalk.com/robot/send?access_token=0e89c96db0cdecca7de49df5c7d6c59f208d32ac7dd3735eda5dd4b85fe0e606
+    secret: SEC36df2a67e5760f9e8e86af316e6e9ad849c8fa971d37705e7a54b17ffdd2644d
     message:
       title: '{{ template "legacy.title" . }}'
       text: '{{ template "legacy.content" . }}'
   webhook_mention_all:
-    url: https://oapi.dingtalk.com/robot/send?access_token=db35157388374164e6b483ac9df1c04d0bd9f29ac7bcac70b79b2a5b753ef221
+    url: https://oapi.dingtalk.com/robot/send?access_token=0e89c96db0cdecca7de49df5c7d6c59f208d32ac7dd3735eda5dd4b85fe0e606
     mention:
       all: true

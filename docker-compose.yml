@@ -10,8 +10,7 @@ services:
       - "./prometheus/tg_cassandra.json:/etc/prometheus/tg_cassandra.json"
       - "./prometheus/tg_node.json:/etc/prometheus/tg_node.json"
       - "./prometheus/tg_mysql.json:/etc/prometheus/tg_mysql.json"
-      - "./prometheus/alert.rules:/etc/prometheus/alert.rules"
-      - "./prometheus/xxx.rules:/etc/prometheus/xxx.rules"
+      - "./prometheus/rules:/etc/prometheus/rules"
       - "/etc/localtime:/etc/localtime:ro"
   grafana:
     image: "grafana/grafana"
@@ -20,8 +19,8 @@ services:
     environment:
       GF_SECURITY_ADMIN_PASSWORD: admin
       GF_SECURITY_ADMIN_USER: admin
-      GF_RENDERING_SERVER_URL: http://10.0.0.64:8081/render
-      GF_RENDERING_CALLBACK_URL: http://10.0.0.64:3000/
+      GF_RENDERING_SERVER_URL: http://10.0.9.243:8081/render
+      GF_RENDERING_CALLBACK_URL: http://10.0.9.243:3000/
       GF_LOG_FILTERS: rendering:debug
 
     volumes:

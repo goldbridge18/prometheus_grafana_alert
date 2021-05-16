@@ -1,0 +1,11 @@
+groups:
+- name: pager
+  rules:
+  - alert: node status
+    expr: up{job="cassandra"} == 1
+    for: 1m
+    labels:
+      user: prometheus
+      severity: warning
+    annotations:
+      description: "服务器: cassandra节点{{ $labels.instance }}down！(当前值: {{ $value }}%)"
