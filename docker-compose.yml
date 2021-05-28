@@ -10,6 +10,8 @@ services:
       - "./prometheus/tg_cassandra.json:/etc/prometheus/tg_cassandra.json"
       - "./prometheus/tg_node.json:/etc/prometheus/tg_node.json"
       - "./prometheus/tg_mysql.json:/etc/prometheus/tg_mysql.json"
+      - "./prometheus/tg_es.json:/etc/prometheus/tg_es.json"
+      - "./prometheus/tg_haproxy.json:/etc/prometheus/tg_haproxy.json"
       - "./prometheus/rules:/etc/prometheus/rules"
       - "/etc/localtime:/etc/localtime:ro"
   grafana:
@@ -57,7 +59,55 @@ services:
       - /etc/localtime:/etc/localtime
     ports:
       - "8060:8060"
+  elasticsearch_exporter:
+    image: justwatch/elasticsearch_exporter:latest
+    command:
+     - '--es.uri=http://10.0.13.134:9200'
+     - '--es.all=true'
+    restart: always
+    ports:
+     - "9113:9114"
+  
+  elasticsearch_exporter-1:
+    image: justwatch/elasticsearch_exporter:latest
+    command:
+     - '--es.uri=http://10.0.13.135:9200'
+    restart: always
+    ports:
+     - "9115:9114"
+
+  elasticsearch_exporter-2:
+    image: justwatch/elasticsearch_exporter:latest
+    command:
+     - '--es.uri=http://10.0.13.136:9200'
+    restart: always
+    ports:
+     - "9116:9114"
+
+  elasticsearch_exporter-3:
+    image: justwatch/elasticsearch_exporter:latest
+    command:
+     - '--es.uri=http://10.0.13.171:9200'
+    restart: always
+    ports:
+     - "9117:9114"
+
+  elasticsearch_exporter-4:
+    image: justwatch/elasticsearch_exporter:latest
+    command:
+     - '--es.uri=http://10.0.13.172:9200'
+    restart: always
+    ports:
+     - "9118:9114"
 
 volumes:
   grafana:
   prometheus:
+
+networks:
+  walle-net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 192.168.0.1/24

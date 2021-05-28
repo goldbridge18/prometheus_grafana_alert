@@ -2,7 +2,7 @@ groups:
 - name: pager
   rules:
   - alert: node status
-    expr: up{job="cassandra"} == 1
+    expr: up{job="cassandra"} == 0
     for: 1m
     labels:
       user: prometheus

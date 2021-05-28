@@ -1,7 +1,10 @@
 global:
-    resolve_timeout: 1m
+    resolve_timeout: 30s
 route:
     group_by: ['alter_cassandra']
+    group_wait: 10s
+    group_interval: 20s
+    repeat_interval: 20s
     receiver: 'webhook'
 
 receivers:
