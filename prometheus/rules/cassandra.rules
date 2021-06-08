@@ -9,3 +9,13 @@ groups:
       severity: warning
     annotations:
       description: "服务器: cassandra节点{{ $labels.instance }}down！(当前值: {{ $value }}%)"
+
+
+  - alert: pending status
+    expr: sum(cassandra_threadpools_pendingtasks{ }) >1
+    for: 1m
+    labels:
+      user: prometheus
+      severity: warning
+    annotations:
+      description: "服务器: cassandra的处于pending的线程数太多！(当前值: {{ $value }})"

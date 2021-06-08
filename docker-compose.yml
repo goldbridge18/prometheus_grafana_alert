@@ -12,6 +12,8 @@ services:
       - "./prometheus/tg_mysql.json:/etc/prometheus/tg_mysql.json"
       - "./prometheus/tg_es.json:/etc/prometheus/tg_es.json"
       - "./prometheus/tg_haproxy.json:/etc/prometheus/tg_haproxy.json"
+      - "./prometheus/tg_kafka.json:/etc/prometheus/tg_kafka.json"
+      - "./prometheus/tg_redis.json:/etc/prometheus/tg_redis.json"
       - "./prometheus/rules:/etc/prometheus/rules"
       - "/etc/localtime:/etc/localtime:ro"
   grafana:
@@ -20,7 +22,7 @@ services:
       - "3000:3000"
     environment:
       GF_SECURITY_ADMIN_PASSWORD: admin
-      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_USER: 123456
       GF_RENDERING_SERVER_URL: http://10.0.9.243:8081/render
       GF_RENDERING_CALLBACK_URL: http://10.0.9.243:3000/
       GF_LOG_FILTERS: rendering:debug
@@ -59,15 +61,6 @@ services:
       - /etc/localtime:/etc/localtime
     ports:
       - "8060:8060"
-  elasticsearch_exporter:
-    image: justwatch/elasticsearch_exporter:latest
-    command:
-     - '--es.uri=http://10.0.13.134:9200'
-     - '--es.all=true'
-    restart: always
-    ports:
-     - "9113:9114"
-  
   elasticsearch_exporter-1:
     image: justwatch/elasticsearch_exporter:latest
     command:
@@ -99,6 +92,35 @@ services:
     restart: always
     ports:
      - "9118:9114"
+  elasticsearch_exporter-5:
+    image: justwatch/elasticsearch_exporter:latest
+    command:
+     - '--es.uri=http://10.0.13.134:9200'
+    restart: always
+    ports:
+     - "9119:9114"
+  haproxy_exporter:
+    image: prom/haproxy-exporter:latest
+    command:
+     - '--haproxy.scrape-uri=http://eeodba:eeoDBA123@10.0.13.131:80/haproxy/stats?stats;csv'
+    restart: always
+    ports:
+     - "9101:9101"
+  kafka_exporter:
+    image: danielqsj/kafka-exporter:latest
+    command:
+     - '--kafka.server=10.0.13.181:9092'
+    restart: always
+    ports:
+     - "9308:9308"
+  redis_exporter:
+    image: oliver006/redis_exporter:latest
+    command:
+     - "--redis.addr=redis://10.0.13.161:52004"
+     - "--redis.password=ee@redis^#**"
+    restart: always
+    ports:
+     - "9121:9121"
 
 volumes:
   grafana:
