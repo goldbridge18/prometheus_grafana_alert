@@ -91,3 +91,30 @@ scrape_configs:
         regex: (.*)(:[0-9]*)$
         target_label: instance
         replacement: ${1}
+  - job_name: "bookie"
+    file_sd_configs:
+      - files:
+        - 'pulsar/tg_bookie.json'
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: (.*)(:[0-9]*)$
+        target_label: instance
+        replacement: ${1}
+  - job_name: "broker"
+    file_sd_configs:
+      - files:
+        - 'pulsar/tg_broker.json'
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: (.*)(:[0-9]*)$
+        target_label: instance
+        replacement: ${1}
+  - job_name: "zookeeper"
+    file_sd_configs:
+      - files:
+        - 'pulsar/tg_zookeeper.json'
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: (.*)(:[0-9]*)$
+        target_label: instance
+        replacement: ${1}

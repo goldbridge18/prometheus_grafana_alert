@@ -7,7 +7,14 @@ services:
     volumes:
       - "prometheus:/prometheus"
       - "./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
-      - "./prometheus:/etc/prometheus"
+      - "./prometheus/tg_cassandra.json:/etc/prometheus/tg_cassandra.json"
+      - "./prometheus/tg_node.json:/etc/prometheus/tg_node.json"
+      - "./prometheus/tg_mysql.json:/etc/prometheus/tg_mysql.json"
+      - "./prometheus/tg_es.json:/etc/prometheus/tg_es.json"
+      - "./prometheus/tg_haproxy.json:/etc/prometheus/tg_haproxy.json"
+      - "./prometheus/tg_kafka.json:/etc/prometheus/tg_kafka.json"
+      - "./prometheus/tg_redis.json:/etc/prometheus/tg_redis.json"
+      - "./prometheus/tg_pulsar.json:/etc/prometheus/tg_pulsar.json"
       - "./prometheus/rules:/etc/prometheus/rules"
       - "/etc/localtime:/etc/localtime:ro"
   grafana:
@@ -15,8 +22,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      GF_SECURITY_ADMIN_PASSWORD: 123456
-      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_SECURITY_ADMIN_USER: 123456
       GF_RENDERING_SERVER_URL: http://10.0.9.243:8081/render
       GF_RENDERING_CALLBACK_URL: http://10.0.9.243:3000/
       GF_LOG_FILTERS: rendering:debug
