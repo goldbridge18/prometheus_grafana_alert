@@ -1,9 +1,0 @@
-[
-  {
-    "targets": [ 
-    ],
-    "labels": {
-      "cluster": "mysql"
-    }
-  }
-]
