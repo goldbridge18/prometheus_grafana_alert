@@ -17,8 +17,8 @@ services:
     environment:
       GF_SECURITY_ADMIN_PASSWORD: 123456
       GF_SECURITY_ADMIN_USER: admin
-      GF_RENDERING_SERVER_URL: http://10.0.9.243:8081/render
-      GF_RENDERING_CALLBACK_URL: http://10.0.9.243:3000/
+      GF_RENDERING_SERVER_URL: http://10.0.0.243:8081/render
+      GF_RENDERING_CALLBACK_URL: http://10.0.0.243:3000/
       GF_LOG_FILTERS: rendering:debug
 
     volumes:
@@ -58,7 +58,7 @@ services:
   elasticsearch_exporter-1:
     image: justwatch/elasticsearch_exporter:latest
     command:
-     - '--es.uri=http://10.0.13.135:9200'
+     - '--es.uri=http://10.0.0.135:9200'
     restart: always
     ports:
      - "9115:9114"
@@ -66,7 +66,7 @@ services:
   elasticsearch_exporter-2:
     image: justwatch/elasticsearch_exporter:latest
     command:
-     - '--es.uri=http://10.0.13.136:9200'
+     - '--es.uri=http://10.0.0.136:9200'
     restart: always
     ports:
      - "9116:9114"
@@ -74,7 +74,7 @@ services:
   elasticsearch_exporter-3:
     image: justwatch/elasticsearch_exporter:latest
     command:
-     - '--es.uri=http://10.0.13.171:9200'
+     - '--es.uri=http://10.0.0.171:9200'
     restart: always
     ports:
      - "9117:9114"
@@ -82,36 +82,36 @@ services:
   elasticsearch_exporter-4:
     image: justwatch/elasticsearch_exporter:latest
     command:
-     - '--es.uri=http://10.0.13.172:9200'
+     - '--es.uri=http://10.0.0.172:9200'
     restart: always
     ports:
      - "9118:9114"
   elasticsearch_exporter-5:
     image: justwatch/elasticsearch_exporter:latest
     command:
-     - '--es.uri=http://10.0.13.134:9200'
+     - '--es.uri=http://10.0.0.134:9200'
     restart: always
     ports:
      - "9119:9114"
   haproxy_exporter:
     image: prom/haproxy-exporter:latest
     command:
-     - '--haproxy.scrape-uri=http://eeodba:eeoDBA123@10.0.13.131:80/haproxy/stats?stats;csv'
+     - '--haproxy.scrape-uri=http://dba:123@10.0.0.131:80/haproxy/stats?stats;csv'
     restart: always
     ports:
      - "9101:9101"
   kafka_exporter:
     image: danielqsj/kafka-exporter:latest
     command:
-     - '--kafka.server=10.0.13.181:9092'
+     - '--kafka.server=10.0.0.181:9092'
     restart: always
     ports:
      - "9308:9308"
   redis_exporter:
     image: oliver006/redis_exporter:latest
     command:
-     - "--redis.addr=redis://10.0.13.161:52004"
-     - "--redis.password=ee@redis^#**"
+     - "--redis.addr=redis://10.0.0.161:52004"
+     - "--redis.password=123
     restart: always
     ports:
      - "9121:9121"
