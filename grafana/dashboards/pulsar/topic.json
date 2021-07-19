@@ -87,7 +87,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "pulsar_rate_in{cluster=~\"$cluster\", namespace=~\"$namespace\", topic=~\"$topic\"}",
+          "expr": "topk(20,sort(pulsar_rate_in{cluster=~\"$cluster\", namespace=~\"$namespace\"}))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -177,7 +177,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "pulsar_subscription_msg_rate_out{cluster=~\"$cluster\", namespace=~\"$namespace\", topic=~\"$topic\"}",
+          "expr": "topk(30,sort(pulsar_subscription_msg_rate_out{cluster=~\"$cluster\", namespace=~\"$namespace\"}))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{subscription}}",
@@ -263,11 +263,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "pulsar_throughput_in{cluster=~\"$cluster\", namespace=~\"$namespace\", topic=~\"$topic\"}",
+          "expr": "topk(20,sort(pulsar_throughput_in{cluster=~\"$cluster\", namespace=~\"$namespace\"}))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{cluster}} - {{namespace}}",
+          "legendFormat": "{{cluster}} - {{topic}}",
           "metric": "pulsar_throughput_in",
           "refId": "A",
           "step": 10
@@ -353,7 +353,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "pulsar_subscription_msg_throughput_out{cluster=~\"$cluster\", namespace=~\"$namespace\", topic=~\"$topic\"}",
+          "expr": "topk(20,sort(pulsar_subscription_msg_throughput_out{cluster=~\"$cluster\", namespace=~\"$namespace\"}))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1072,7 +1072,7 @@
         "multi": false,
         "name": "cluster",
         "options": [],
-        "query": "pulsar_producers_count{cluster=~\".+\",job=\"broker\"}",
+        "query": "pulsar_topics_count{cluster=~\".+\",job=\"broker\"}",
         "refresh": 1,
         "regex": "/.*[^_]cluster=\\\"([^\\\"]+)\\\".*/",
         "sort": 1,
@@ -1092,7 +1092,7 @@
         "multi": false,
         "name": "namespace",
         "options": [],
-        "query": "pulsar_producers_count{namespace=~\".+\",job=\"broker\"}",
+        "query": "pulsar_topics_count{namespace=~\".+\",job=\"broker\"}",
         "refresh": 2,
         "regex": "/.*namespace=\\\"([^\\\"]+)\\\".*/",
         "sort": 1,
@@ -1112,7 +1112,7 @@
         "multi": false,
         "name": "topic",
         "options": [],
-        "query": "pulsar_producers_count{namespace=~\"$namespace\",topic=~\".+\",job=\"broker\"}",
+        "query": "pulsar_producers_count_00{namespace=~\"$namespace\",topic=~\".+\",job=\"broker\"}",
         "refresh": 2,
         "regex": "/.*topic=\\\"([^\\\"]+)\\\".*/",
         "sort": 1,

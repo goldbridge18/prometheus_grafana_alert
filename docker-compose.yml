@@ -23,9 +23,9 @@ services:
 
     volumes:
       - "grafana:/var/lib/grafana"
+      - "./grafana/dashboards:/var/lib/grafana/dashboards"
       - "./grafana/prometheus-datasource.yaml:/etc/grafana/provisioning/datasources/prometheus-datasource.yaml"
       - "./grafana/dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml"
-      - "./grafana/dashboards:/var/lib/grafana/dashboards"
       - "/etc/localtime:/etc/localtime:ro"
   alertmanager:
     image: "prom/alertmanager"

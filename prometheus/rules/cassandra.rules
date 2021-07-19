@@ -12,10 +12,10 @@ groups:
 
 
   - alert: pending status
-    expr: sum(cassandra_threadpools_pendingtasks{ }) >1
+    expr: sum(cassandra_threadpools_pendingtasks{ } ) by(instance) >=2
     for: 1m
     labels:
       user: prometheus
       severity: warning
     annotations:
-      description: "服务器: cassandra的处于pending的线程数太多！(当前值: {{ $value }})"
+      description: "服务器: cassandra:[{{ $labels.instance }}]的处于pending的线程数太多！(当前值: {{ $value }})"

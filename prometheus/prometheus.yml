@@ -118,3 +118,12 @@ scrape_configs:
         regex: (.*)(:[0-9]*)$
         target_label: instance
         replacement: ${1}
+  - job_name: "mongodb"
+    file_sd_configs:
+      - files:
+        - 'mongodb/*.json'
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: (.*)(:[0-9]*)$
+        target_label: instance
+        replacement: ${1}
