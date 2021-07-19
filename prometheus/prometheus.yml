@@ -6,7 +6,7 @@ global:
 alerting:
   alertmanagers:
   - static_configs:
-    - targets: ['10.0.9.243:9093']
+    - targets: ['10.0.0.243:9093']
     scheme: http
     timeout: 10s
 
@@ -21,7 +21,7 @@ scrape_configs:
     scheme: http
     static_configs:
     - targets:
-      - 10.0.9.243:9090
+      - 10.0.0.243:9090
 
   - job_name: "cassandra"
     scrape_interval: 15s
